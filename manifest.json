@@ -1,0 +1,19 @@
+{
+  "name": "T.I.M.E. Machine Console",
+  "short_name": "T.I.M.E.",
+  "description": "Temporal Interface & Manipulation Engine - Time Machine Control Console",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#00ff00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
