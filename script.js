@@ -394,9 +394,6 @@ function updateGaugesFromSliders() {
     if (powerGaugeText) powerGaugeText.textContent = (powerGaugeVal * 0.0165).toFixed(2) + ' GW';
     if (fluxGaugeText) fluxGaugeText.textContent = Math.round(fluxGaugeVal * 0.88) + ' MPH';
     if (integrityGaugeText) integrityGaugeText.textContent = integrityGaugeVal.toFixed(1) + '%';
-
-    // Flash random indicator when sliders move significantly
-    flashRandom();
 }
 
 function playClick() {
