@@ -307,7 +307,7 @@ function initUselessControls() {
         });
     });
 
-    // Useless buttons
+    // Useless buttons - now just flash random indicators
     const buttons = document.querySelectorAll('.useless-btn');
     buttons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -316,11 +316,12 @@ function initUselessControls() {
             setTimeout(() => {
                 this.style.transform = '';
             }, 100);
-
-            // Random gauge movement
-            randomizeGauges();
+            flashRandom();
         });
     });
+
+    // Initialize sliders
+    initSliders();
 
     // Engage button
     const engageBtn = document.getElementById('engage-btn');
@@ -329,6 +330,73 @@ function initUselessControls() {
             initiateEngageSequence();
         });
     }
+}
+
+function initSliders() {
+    const powerSlider = document.getElementById('power-slider');
+    const fluxSlider = document.getElementById('flux-slider');
+    const stabilitySlider = document.getElementById('stability-slider');
+
+    if (powerSlider) {
+        powerSlider.addEventListener('input', updateGaugesFromSliders);
+    }
+    if (fluxSlider) {
+        fluxSlider.addEventListener('input', updateGaugesFromSliders);
+    }
+    if (stabilitySlider) {
+        stabilitySlider.addEventListener('input', updateGaugesFromSliders);
+    }
+
+    // Initial update
+    updateGaugesFromSliders();
+}
+
+function updateGaugesFromSliders() {
+    const powerSlider = document.getElementById('power-slider');
+    const fluxSlider = document.getElementById('flux-slider');
+    const stabilitySlider = document.getElementById('stability-slider');
+
+    const power = powerSlider ? parseInt(powerSlider.value) : 50;
+    const flux = fluxSlider ? parseInt(fluxSlider.value) : 50;
+    const stability = stabilitySlider ? parseInt(stabilitySlider.value) : 50;
+
+    // Update slider value displays
+    const powerValue = document.getElementById('power-slider-value');
+    const fluxValue = document.getElementById('flux-slider-value');
+    const stabilityValue = document.getElementById('stability-slider-value');
+
+    if (powerValue) powerValue.textContent = power + '%';
+    if (fluxValue) fluxValue.textContent = flux + '%';
+    if (stabilityValue) stabilityValue.textContent = stability + '%';
+
+    // Calculate gauge values with cross-effects
+    // Power gauge: affected by power (80%) and stability (20%)
+    const powerGaugeVal = Math.min(100, (power * 0.8) + (stability * 0.2));
+    // Flux gauge: affected by flux (70%) and power (30%)
+    const fluxGaugeVal = Math.min(100, (flux * 0.7) + (power * 0.3));
+    // Integrity gauge: affected by stability (75%) and inverse of flux (25%)
+    const integrityGaugeVal = Math.min(100, (stability * 0.75) + ((100 - flux) * 0.25));
+
+    // Update gauge bars
+    const powerGauge = document.getElementById('power-gauge');
+    const fluxGauge = document.getElementById('flux-gauge');
+    const integrityGauge = document.getElementById('integrity-gauge');
+
+    if (powerGauge) powerGauge.style.width = powerGaugeVal + '%';
+    if (fluxGauge) fluxGauge.style.width = fluxGaugeVal + '%';
+    if (integrityGauge) integrityGauge.style.width = integrityGaugeVal + '%';
+
+    // Update gauge value text
+    const powerGaugeText = powerGauge?.parentElement?.nextElementSibling;
+    const fluxGaugeText = fluxGauge?.parentElement?.nextElementSibling;
+    const integrityGaugeText = integrityGauge?.parentElement?.nextElementSibling;
+
+    if (powerGaugeText) powerGaugeText.textContent = (powerGaugeVal * 0.0165).toFixed(2) + ' GW';
+    if (fluxGaugeText) fluxGaugeText.textContent = Math.round(fluxGaugeVal * 0.88) + ' MPH';
+    if (integrityGaugeText) integrityGaugeText.textContent = integrityGaugeVal.toFixed(1) + '%';
+
+    // Flash random indicator when sliders move significantly
+    flashRandom();
 }
 
 function playClick() {
@@ -344,14 +412,6 @@ function flashRandom() {
     setTimeout(() => {
         indicator.classList.remove('active');
     }, 500);
-}
-
-function randomizeGauges() {
-    const gauges = document.querySelectorAll('.gauge-fill');
-    gauges.forEach(gauge => {
-        const newWidth = 50 + Math.random() * 50;
-        gauge.style.width = newWidth + '%';
-    });
 }
 
 function initIndicators() {

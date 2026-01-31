@@ -297,6 +297,76 @@ body {
 .useless-btn.green { border-color: #00ff00; color: #00ff00; }
 .useless-btn.small { padding: 6px 10px; font-size: 0.6rem; }
 
+/* Slider Controls */
+.slider-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.slider-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100px;
+}
+.slider-label {
+    font-size: 0.55rem;
+    color: #888;
+    text-align: center;
+}
+.slider-value {
+    font-size: 0.65rem;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+/* Custom slider styling */
+.console-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(180deg, #111, #222);
+    border: 2px solid #444;
+    border-radius: 4px;
+    outline: none;
+    writing-mode: vertical-lr;
+    direction: rtl;
+}
+
+.console-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 30px;
+    height: 12px;
+    background: linear-gradient(145deg, #00aa00, #006600);
+    border: 2px solid #00ff00;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+}
+
+.console-slider::-moz-range-thumb {
+    width: 30px;
+    height: 12px;
+    background: linear-gradient(145deg, #00aa00, #006600);
+    border: 2px solid #00ff00;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+}
+
+.console-slider::-webkit-slider-runnable-track {
+    background: transparent;
+}
+
+.console-slider::-moz-range-track {
+    background: transparent;
+}
+
 /* Gauges */
 .gauge-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 10px; flex-wrap: wrap; }
 .gauge { width: 140px; }
@@ -590,6 +660,12 @@ body {
 
     .useless-btn { padding: 6px 8px; font-size: 0.6rem; }
     .useless-btn.small { padding: 4px 6px; font-size: 0.5rem; }
+
+    .slider-row { gap: 12px; }
+    .slider-control { width: 80px; }
+    .console-slider { height: 50px; }
+    .slider-label { font-size: 0.5rem; }
+    .slider-value { font-size: 0.55rem; }
 
     .gauge { width: 100px; }
     .gauge-bar { height: 10px; }

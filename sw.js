@@ -1,4 +1,4 @@
-const CACHE_NAME = 'time-machine-v10';
+const CACHE_NAME = 'time-machine-v11';
 const urlsToCache = [
   './',
   './index.html',

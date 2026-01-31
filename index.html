@@ -219,11 +219,23 @@
                     </div>
                 </div>
 
-                <div class="button-row">
-                    <button class="useless-btn red" id="btn-abort">ABORT</button>
-                    <button class="useless-btn yellow" id="btn-calibrate">CALIBRATE</button>
-                    <button class="useless-btn blue" id="btn-diagnostics">DIAGNOSTICS</button>
-                    <button class="useless-btn green" id="btn-prime">PRIME ENGINE</button>
+                <!-- Slider Controls -->
+                <div class="slider-row">
+                    <div class="slider-control">
+                        <div class="slider-label">POWER OUTPUT</div>
+                        <input type="range" class="console-slider" id="power-slider" min="0" max="100" value="73">
+                        <div class="slider-value" id="power-slider-value">73%</div>
+                    </div>
+                    <div class="slider-control">
+                        <div class="slider-label">FLUX RATE</div>
+                        <input type="range" class="console-slider" id="flux-slider" min="0" max="100" value="88">
+                        <div class="slider-value" id="flux-slider-value">88%</div>
+                    </div>
+                    <div class="slider-control">
+                        <div class="slider-label">STABILITY</div>
+                        <input type="range" class="console-slider" id="stability-slider" min="0" max="100" value="95">
+                        <div class="slider-value" id="stability-slider-value">95%</div>
+                    </div>
                 </div>
 
                 <div class="button-row">
@@ -231,8 +243,6 @@
                     <button class="useless-btn small" id="btn-aux2">AUX 2</button>
                     <button class="useless-btn small" id="btn-aux3">AUX 3</button>
                     <button class="useless-btn small" id="btn-reset">RESET</button>
-                    <button class="useless-btn small" id="btn-backup">BACKUP</button>
-                    <button class="useless-btn small" id="btn-restore">RESTORE</button>
                 </div>
 
                 <!-- Extra gauges and indicators -->
