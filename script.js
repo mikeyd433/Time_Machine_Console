@@ -337,15 +337,21 @@ function initSliders() {
     const fluxSlider = document.getElementById('flux-slider');
     const stabilitySlider = document.getElementById('stability-slider');
 
-    if (powerSlider) {
-        powerSlider.addEventListener('input', updateGaugesFromSliders);
-    }
-    if (fluxSlider) {
-        fluxSlider.addEventListener('input', updateGaugesFromSliders);
-    }
-    if (stabilitySlider) {
-        stabilitySlider.addEventListener('input', updateGaugesFromSliders);
-    }
+    const sliders = [powerSlider, fluxSlider, stabilitySlider].filter(Boolean);
+
+    sliders.forEach(slider => {
+        slider.addEventListener('input', updateGaugesFromSliders);
+
+        // Prevent page scroll while dragging slider on mobile
+        slider.addEventListener('touchstart', function(e) {
+            e.stopPropagation();
+        }, { passive: true });
+
+        slider.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }, { passive: false });
+    });
 
     // Initial update
     updateGaugesFromSliders();

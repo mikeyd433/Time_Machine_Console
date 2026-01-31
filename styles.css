@@ -311,6 +311,7 @@ body {
     align-items: center;
     gap: 5px;
     width: 100px;
+    touch-action: none;
 }
 .slider-label {
     font-size: 0.55rem;
