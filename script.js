@@ -15,7 +15,7 @@ const maxLengths = {
 
 document.addEventListener('DOMContentLoaded', function() {
     // Check if we're on the main page and need to redirect to auth
-    if (document.querySelector('.console-main') && !document.querySelector('.auth-page')) {
+    if (document.querySelector('.console-frame') && !document.querySelector('.auth-page')) {
         const redirectToAuth = checkAuthAndRedirect();
         if (redirectToAuth) return; // Don't initialize if redirecting
     }
