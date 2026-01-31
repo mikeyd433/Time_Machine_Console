@@ -291,7 +291,7 @@ function checkAuthStatus() {
 // ========== FINGERPRINT AUTHENTICATION ==========
 
 function initFingerprint() {
-    const scanner = document.querySelector('.scanner-glass');
+    const scanner = document.getElementById('scanner-glass');
     const scanLine = document.getElementById('scan-line');
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
@@ -299,47 +299,82 @@ function initFingerprint() {
     const authStatus = document.querySelector('.status-text');
     const resetBtn = document.getElementById('reset-btn');
 
-    let attempts = 0;
     let isScanning = false;
+    let scanInterval;
+    let progress = 0;
 
     if (scanner) {
-        scanner.addEventListener('click', function() {
-            if (isScanning) return;
+        // Mouse events
+        scanner.addEventListener('mousedown', startScan);
+        scanner.addEventListener('mouseup', stopScan);
+        scanner.addEventListener('mouseleave', stopScan);
 
-            isScanning = true;
-            attempts++;
-            document.getElementById('scan-attempts').textContent = `${attempts} / 3`;
-
-            // Start scan animation
-            scanLine.classList.add('scanning');
-            scanner.classList.add('active');
-            authStatus.textContent = 'SCANNING...';
-            authMessage.textContent = 'Keep finger steady on scanner...';
-
-            // Animate progress
-            let progress = 0;
-            const progressInterval = setInterval(() => {
-                progress += 2;
-                progressFill.style.width = progress + '%';
-                progressText.textContent = progress + '%';
-
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    scanLine.classList.remove('scanning');
-
-                    // Always succeed after scanning
-                    setTimeout(() => {
-                        authStatus.textContent = 'FINGERPRINT VERIFIED';
-                        authStatus.style.color = '#00ff00';
-                        authMessage.textContent = 'Identity confirmed. Access granted.';
-                        authMessage.style.color = '#00ff00';
-
-                        localStorage.setItem('fingerprint-auth', 'true');
-                        isScanning = false;
-                    }, 500);
-                }
-            }, 40);
+        // Touch events
+        scanner.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            startScan();
         });
+        scanner.addEventListener('touchend', stopScan);
+    }
+
+    function startScan() {
+        if (isScanning || localStorage.getItem('fingerprint-auth') === 'true') return;
+
+        isScanning = true;
+        scanLine.classList.add('scanning');
+        scanner.classList.add('active');
+        authStatus.textContent = 'SCANNING...';
+        authMessage.textContent = 'Keep finger steady on scanner...';
+
+        scanInterval = setInterval(() => {
+            progress += 2;
+            progressFill.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+
+            if (progress >= 100) {
+                clearInterval(scanInterval);
+                completeScan();
+            }
+        }, 40);
+    }
+
+    function stopScan() {
+        if (!isScanning || progress >= 100) return;
+
+        isScanning = false;
+        clearInterval(scanInterval);
+        scanLine.classList.remove('scanning');
+        scanner.classList.remove('active');
+        authStatus.textContent = 'SCAN INTERRUPTED';
+        authMessage.textContent = 'Hold finger until scan completes...';
+
+        // Reset progress slowly
+        const resetInterval = setInterval(() => {
+            progress -= 5;
+            if (progress <= 0) {
+                progress = 0;
+                clearInterval(resetInterval);
+                authStatus.textContent = 'AWAITING FINGERPRINT';
+                authMessage.textContent = 'Hold finger on scanner to begin';
+            }
+            progressFill.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+        }, 30);
+    }
+
+    function completeScan() {
+        scanLine.classList.remove('scanning');
+        isScanning = false;
+
+        setTimeout(() => {
+            authStatus.textContent = 'FINGERPRINT VERIFIED';
+            authStatus.style.color = '#00ff00';
+            authMessage.textContent = 'Identity confirmed. Access granted.';
+            authMessage.style.color = '#00ff00';
+            scanner.classList.add('verified');
+
+            localStorage.setItem('fingerprint-auth', 'true');
+        }, 500);
     }
 
     if (resetBtn) {
