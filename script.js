@@ -14,6 +14,12 @@ const maxLengths = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on the main page and need to redirect to auth
+    if (document.querySelector('.console-main') && !document.querySelector('.auth-page')) {
+        const redirectToAuth = checkAuthAndRedirect();
+        if (redirectToAuth) return; // Don't initialize if redirecting
+    }
+
     // Initialize menu
     initMenu();
 
@@ -33,6 +39,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check auth status
     checkAuthStatus();
 });
+
+// Check auth status and redirect to first incomplete auth page
+function checkAuthAndRedirect() {
+    const fp = localStorage.getItem('fingerprint-auth') === 'true';
+    const voice = localStorage.getItem('voice-auth') === 'true';
+    const retina = localStorage.getItem('retina-auth') === 'true';
+
+    if (!fp) {
+        window.location.href = 'fingerprint.html';
+        return true;
+    } else if (!voice) {
+        window.location.href = 'voice.html';
+        return true;
+    } else if (!retina) {
+        window.location.href = 'retina.html';
+        return true;
+    }
+    return false;
+}
+
+// Get the next auth page after completing current one
+function getNextAuthPage(current) {
+    const fp = localStorage.getItem('fingerprint-auth') === 'true';
+    const voice = localStorage.getItem('voice-auth') === 'true';
+    const retina = localStorage.getItem('retina-auth') === 'true';
+
+    if (current === 'fingerprint') {
+        if (!voice) return 'voice.html';
+        if (!retina) return 'retina.html';
+        return 'index.html';
+    } else if (current === 'voice') {
+        if (!retina) return 'retina.html';
+        return 'index.html';
+    } else if (current === 'retina') {
+        return 'index.html';
+    }
+    return 'index.html';
+}
 
 function initMenu() {
     const menuBtn = document.getElementById('menu-btn');
@@ -465,6 +509,11 @@ function initFingerprint() {
             scanner.classList.add('verified');
 
             localStorage.setItem('fingerprint-auth', 'true');
+
+            // Redirect to next auth page after short delay
+            setTimeout(() => {
+                window.location.href = getNextAuthPage('fingerprint');
+            }, 1500);
         }, 500);
     }
 
@@ -575,6 +624,11 @@ function initVoice() {
                     freqAnalysis.textContent = 'COMPLETE';
 
                     localStorage.setItem('voice-auth', 'true');
+
+                    // Redirect to next auth page after short delay
+                    setTimeout(() => {
+                        window.location.href = getNextAuthPage('voice');
+                    }, 1500);
                 }, 500);
             }
         }, 50);
@@ -669,6 +723,11 @@ function initRetina() {
 
                         localStorage.setItem('retina-auth', 'true');
                         isScanning = false;
+
+                        // Redirect to main console after short delay
+                        setTimeout(() => {
+                            window.location.href = getNextAuthPage('retina');
+                        }, 1500);
                     }, 500);
                 }
             }, 40);
