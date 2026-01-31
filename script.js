@@ -1,5 +1,93 @@
 // T.I.M.E. Machine Console JavaScript
 
+// ========== 7-SEGMENT DISPLAY ==========
+
+// Segment map: which segments are ON for each character
+// Segments: a=top, b=top-right, c=bottom-right, d=bottom, e=bottom-left, f=top-left, g=middle
+const SEGMENT_MAP = {
+    '0': ['a', 'b', 'c', 'd', 'e', 'f'],
+    '1': ['b', 'c'],
+    '2': ['a', 'b', 'g', 'e', 'd'],
+    '3': ['a', 'b', 'g', 'c', 'd'],
+    '4': ['f', 'g', 'b', 'c'],
+    '5': ['a', 'f', 'g', 'c', 'd'],
+    '6': ['a', 'f', 'g', 'e', 'd', 'c'],
+    '7': ['a', 'b', 'c'],
+    '8': ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+    '9': ['a', 'b', 'c', 'd', 'f', 'g'],
+    '-': ['g'],
+    ' ': [],
+    '': []
+};
+
+// Create segment HTML for a single digit
+function createSegmentDigit() {
+    const digit = document.createElement('div');
+    digit.className = 'seg-digit';
+    digit.innerHTML = `
+        <div class="seg seg-a"></div>
+        <div class="seg seg-b"></div>
+        <div class="seg seg-c"></div>
+        <div class="seg seg-d"></div>
+        <div class="seg seg-e"></div>
+        <div class="seg seg-f"></div>
+        <div class="seg seg-g"></div>
+        <div class="seg seg-dp"></div>
+    `;
+    return digit;
+}
+
+// Initialize all 7-segment displays on the page
+function initSevenSegDisplays() {
+    const displays = document.querySelectorAll('.seven-seg-display');
+    displays.forEach(display => {
+        const numDigits = parseInt(display.dataset.digits) || 2;
+        const initialValue = display.dataset.value || '';
+
+        // Clear existing content
+        display.innerHTML = '';
+
+        // Create segment digits
+        for (let i = 0; i < numDigits; i++) {
+            display.appendChild(createSegmentDigit());
+        }
+
+        // Set initial value
+        if (initialValue) {
+            setSegmentDisplay(display, initialValue);
+        }
+    });
+}
+
+// Update a 7-segment display with a value
+function setSegmentDisplay(display, value) {
+    if (typeof display === 'string') {
+        display = document.getElementById(display);
+    }
+    if (!display) return;
+
+    const digits = display.querySelectorAll('.seg-digit');
+    const numDigits = digits.length;
+    const paddedValue = String(value).padStart(numDigits, ' ');
+
+    digits.forEach((digit, i) => {
+        const char = paddedValue[i];
+        const segments = SEGMENT_MAP[char] || [];
+
+        // Update each segment
+        ['a', 'b', 'c', 'd', 'e', 'f', 'g'].forEach(seg => {
+            const segEl = digit.querySelector(`.seg-${seg}`);
+            if (segEl) {
+                if (segments.includes(seg)) {
+                    segEl.classList.add('on');
+                } else {
+                    segEl.classList.remove('on');
+                }
+            }
+        });
+    });
+}
+
 // ========== MAIN CONSOLE ==========
 
 // Numpad functionality
@@ -19,6 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const redirectToAuth = checkAuthAndRedirect();
         if (redirectToAuth) return; // Don't initialize if redirecting
     }
+
+    // Initialize 7-segment displays
+    initSevenSegDisplays();
 
     // Initialize menu
     initMenu();
@@ -169,28 +260,18 @@ function handleNumpadInput(input) {
 }
 
 function updateNumpadDisplay() {
-    const display = document.getElementById('numpad-display');
-    if (!display) return;
-
-    const digits = display.querySelectorAll('.digit');
     const padded = numpadBuffer.padStart(4, '-');
-
-    digits.forEach((digit, i) => {
-        digit.textContent = padded[i];
-    });
+    setSegmentDisplay('numpad-display', padded);
 }
 
 function applyNumpadValue() {
     const targetDisplay = document.getElementById(currentTarget);
     if (!targetDisplay || !numpadBuffer) return;
 
-    const digits = targetDisplay.querySelectorAll('.digit');
     const maxLen = maxLengths[currentTarget];
     const padded = numpadBuffer.padStart(maxLen, '0');
 
-    digits.forEach((digit, i) => {
-        digit.textContent = padded[i];
-    });
+    setSegmentDisplay(targetDisplay, padded);
 
     // Flash effect
     targetDisplay.style.boxShadow = '0 0 20px #ff0000';
@@ -213,13 +294,7 @@ function updatePresentTime() {
 }
 
 function setDisplayValue(displayId, value) {
-    const display = document.getElementById(displayId);
-    if (!display) return;
-
-    const digits = display.querySelectorAll('.digit');
-    digits.forEach((digit, i) => {
-        digit.textContent = value[i] || '-';
-    });
+    setSegmentDisplay(displayId, value);
 }
 
 function initUselessControls() {
