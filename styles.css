@@ -335,6 +335,7 @@ body {
     outline: none;
     writing-mode: vertical-lr;
     direction: rtl;
+    touch-action: none;
 }
 
 .console-slider::-webkit-slider-thumb {
