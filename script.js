@@ -117,6 +117,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize numpad
     initNumpad();
 
+    // Initialize step navigation
+    initStepNavigation();
+
     // Initialize present time display
     updatePresentTime();
     setInterval(updatePresentTime, 1000);
@@ -211,6 +214,52 @@ function initMenu() {
             localStorage.removeItem('retina-auth');
             location.reload();
         });
+    }
+}
+
+// Step navigation
+function initStepNavigation() {
+    const btnToControls = document.getElementById('btn-to-controls');
+    const btnBackDate = document.getElementById('btn-back-date');
+    const btnArm = document.getElementById('btn-arm');
+    const btnBackControls = document.getElementById('btn-back-controls');
+
+    if (btnToControls) {
+        btnToControls.addEventListener('click', () => showStep('step-controls'));
+    }
+    if (btnBackDate) {
+        btnBackDate.addEventListener('click', () => showStep('step-date'));
+    }
+    if (btnArm) {
+        btnArm.addEventListener('click', () => {
+            // Arm the system - show engage step
+            showStep('step-engage');
+            // Activate indicators
+            const standby = document.getElementById('ind-standby');
+            const ready = document.getElementById('ind-ready');
+            if (standby) standby.classList.remove('active');
+            if (ready) ready.classList.add('active');
+        });
+    }
+    if (btnBackControls) {
+        btnBackControls.addEventListener('click', () => {
+            // Disarm - go back to controls
+            showStep('step-controls');
+            const standby = document.getElementById('ind-standby');
+            const ready = document.getElementById('ind-ready');
+            if (standby) standby.classList.add('active');
+            if (ready) ready.classList.remove('active');
+        });
+    }
+}
+
+function showStep(stepId) {
+    const steps = document.querySelectorAll('.console-step');
+    steps.forEach(step => step.classList.remove('active'));
+
+    const targetStep = document.getElementById(stepId);
+    if (targetStep) {
+        targetStep.classList.add('active');
     }
 }
 

@@ -17,6 +17,8 @@ body {
     min-height: 100vh;
     border-left: 3px solid #444;
     border-right: 3px solid #444;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header */
@@ -402,6 +404,91 @@ body {
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
+/* Step-based Layout */
+.console-step {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+.console-step.active {
+    display: flex;
+}
+.step-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding: 10px 0;
+    gap: 10px;
+}
+.engage-content {
+    justify-content: space-around;
+}
+.step-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 15px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(145deg, #004400, #002200);
+    border: 3px solid #00ff00;
+    color: #00ff00;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.2s;
+}
+.step-btn:hover {
+    background: linear-gradient(145deg, #006600, #003300);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+.step-btn:active {
+    transform: scale(0.98);
+}
+.step-btn.secondary {
+    background: linear-gradient(145deg, #333, #222);
+    border-color: #666;
+    color: #888;
+}
+.step-btn.secondary:hover {
+    border-color: #00ff00;
+    color: #00ff00;
+}
+.step-btn.arm {
+    background: linear-gradient(145deg, #664400, #332200);
+    border-color: #ffaa00;
+    color: #ffaa00;
+}
+.step-btn.arm:hover {
+    background: linear-gradient(145deg, #885500, #443300);
+    box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
+}
+.step-nav {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.step-nav .step-btn {
+    width: auto;
+    flex: 1;
+    max-width: 200px;
+}
+
+/* Compact control panel for step layout */
+.control-panel.compact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 /* Engage Button */
 .engage-section { display: flex; justify-content: center; padding: 15px; }
 .engage-btn {
@@ -421,7 +508,7 @@ body {
 .engage-subtitle { font-size: 0.5rem; color: #aa0000; margin-top: 5px; text-align: center; }
 
 /* Footer */
-.console-footer { text-align: center; padding: 10px; border-top: 1px solid #333; margin-top: 10px; }
+.console-footer { text-align: center; padding: 10px; border-top: 1px solid #333; margin-top: auto; }
 .footer-text { font-size: 0.6rem; color: #555; margin: 2px 0; }
 
 /* ========== AUTH PAGES ========== */
@@ -622,6 +709,11 @@ body {
     .console-frame { padding: 5px; }
     .logo { font-size: 1.5rem; letter-spacing: 0.2em; }
     .auth-page .logo { font-size: 1.2rem; }
+
+    .step-content { padding: 5px 0; gap: 8px; }
+    .step-btn { padding: 12px 15px; font-size: 0.85rem; }
+    .step-nav { gap: 10px; padding: 5px; }
+    .step-nav .step-btn { max-width: 150px; }
 
     .display-section { padding: 5px; margin-bottom: 5px; }
     .seven-seg-display { padding: 3px 4px; gap: 1px; }

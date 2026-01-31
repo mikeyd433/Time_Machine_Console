@@ -25,162 +25,120 @@
             </div>
             <div class="logo">T.I.M.E.</div>
             <div class="subtitle">Temporal Interface & Manipulation Engine</div>
-            <div class="model">MODEL TM-3000 SERIES</div>
         </header>
 
-        <div class="auth-status-bar">
-            <div class="auth-indicator" id="fingerprint-status">
-                <span class="status-light off"></span>
-                <a href="fingerprint.html">FINGERPRINT</a>
+        <!-- STEP 1: Date Entry -->
+        <main class="console-step active" id="step-date">
+            <div class="step-content">
+                <section class="display-section destination">
+                    <div class="section-label">SET DESTINATION TIME</div>
+                    <div class="display-row">
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="dest-month" data-digits="2" data-value="88"></div>
+                            <div class="display-label">MONTH</div>
+                        </div>
+                        <div class="display-separator">/</div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="dest-day" data-digits="2" data-value="88"></div>
+                            <div class="display-label">DAY</div>
+                        </div>
+                        <div class="display-separator">/</div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="dest-year" data-digits="4" data-value="8888"></div>
+                            <div class="display-label">YEAR</div>
+                        </div>
+                        <div class="display-spacer"></div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="dest-hour" data-digits="2" data-value="88"></div>
+                            <div class="display-label">HOUR</div>
+                        </div>
+                        <div class="display-separator">:</div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="dest-min" data-digits="2" data-value="88"></div>
+                            <div class="display-label">MIN</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="control-panel compact">
+                    <div class="numpad-section">
+                        <div class="numpad-display">
+                            <div class="seven-seg-display" id="numpad-display" data-digits="4" data-value="----"></div>
+                        </div>
+                        <div class="numpad">
+                            <button class="num-btn" data-num="1">1</button>
+                            <button class="num-btn" data-num="2">2</button>
+                            <button class="num-btn" data-num="3">3</button>
+                            <button class="num-btn" data-num="4">4</button>
+                            <button class="num-btn" data-num="5">5</button>
+                            <button class="num-btn" data-num="6">6</button>
+                            <button class="num-btn" data-num="7">7</button>
+                            <button class="num-btn" data-num="8">8</button>
+                            <button class="num-btn" data-num="9">9</button>
+                            <button class="num-btn clear-btn" data-num="C">CLR</button>
+                            <button class="num-btn" data-num="0">0</button>
+                            <button class="num-btn enter-btn" data-num="E">ENT</button>
+                        </div>
+                    </div>
+
+                    <div class="target-selector">
+                        <div class="selector-label">TARGET</div>
+                        <div class="selector-switches">
+                            <label class="toggle-switch">
+                                <input type="radio" name="target" value="dest-month" checked>
+                                <span class="switch-label">MON</span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="radio" name="target" value="dest-day">
+                                <span class="switch-label">DAY</span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="radio" name="target" value="dest-year">
+                                <span class="switch-label">YEAR</span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="radio" name="target" value="dest-hour">
+                                <span class="switch-label">HR</span>
+                            </label>
+                            <label class="toggle-switch">
+                                <input type="radio" name="target" value="dest-min">
+                                <span class="switch-label">MIN</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <button class="step-btn" id="btn-to-controls">PROCEED TO CONTROLS</button>
             </div>
-            <div class="auth-indicator" id="voice-status">
-                <span class="status-light off"></span>
-                <a href="voice.html">VOICE ID</a>
-            </div>
-            <div class="auth-indicator" id="retina-status">
-                <span class="status-light off"></span>
-                <a href="retina.html">RETINA SCAN</a>
-            </div>
-        </div>
+        </main>
 
-        <main class="console-main">
-            <!-- Destination Time Display -->
-            <section class="display-section destination">
-                <div class="section-label">DESTINATION TIME</div>
-                <div class="display-row">
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="dest-month" data-digits="2" data-value="88"></div>
-                        <div class="display-label">MONTH</div>
-                    </div>
-                    <div class="display-separator">/</div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="dest-day" data-digits="2" data-value="88"></div>
-                        <div class="display-label">DAY</div>
-                    </div>
-                    <div class="display-separator">/</div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="dest-year" data-digits="4" data-value="8888"></div>
-                        <div class="display-label">YEAR</div>
-                    </div>
-                    <div class="display-spacer"></div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="dest-hour" data-digits="2" data-value="88"></div>
-                        <div class="display-label">HOUR</div>
-                    </div>
-                    <div class="display-separator">:</div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="dest-min" data-digits="2" data-value="88"></div>
-                        <div class="display-label">MIN</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Present Time Display -->
-            <section class="display-section present">
-                <div class="section-label">PRESENT TIME</div>
-                <div class="display-row">
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="pres-month" data-digits="2" data-value="00"></div>
-                        <div class="display-label">MONTH</div>
-                    </div>
-                    <div class="display-separator">/</div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="pres-day" data-digits="2" data-value="00"></div>
-                        <div class="display-label">DAY</div>
-                    </div>
-                    <div class="display-separator">/</div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="pres-year" data-digits="4" data-value="0000"></div>
-                        <div class="display-label">YEAR</div>
-                    </div>
-                    <div class="display-spacer"></div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="pres-hour" data-digits="2" data-value="00"></div>
-                        <div class="display-label">HOUR</div>
-                    </div>
-                    <div class="display-separator">:</div>
-                    <div class="display-group">
-                        <div class="seven-seg-display" id="pres-min" data-digits="2" data-value="00"></div>
-                        <div class="display-label">MIN</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Control Panel -->
-            <section class="control-panel">
-                <div class="numpad-section">
-                    <div class="numpad-display">
-                        <div class="seven-seg-display" id="numpad-display" data-digits="4" data-value="----"></div>
-                    </div>
-                    <div class="numpad">
-                        <button class="num-btn" data-num="1">1</button>
-                        <button class="num-btn" data-num="2">2</button>
-                        <button class="num-btn" data-num="3">3</button>
-                        <button class="num-btn" data-num="4">4</button>
-                        <button class="num-btn" data-num="5">5</button>
-                        <button class="num-btn" data-num="6">6</button>
-                        <button class="num-btn" data-num="7">7</button>
-                        <button class="num-btn" data-num="8">8</button>
-                        <button class="num-btn" data-num="9">9</button>
-                        <button class="num-btn clear-btn" data-num="C">CLR</button>
-                        <button class="num-btn" data-num="0">0</button>
-                        <button class="num-btn enter-btn" data-num="E">ENT</button>
-                    </div>
-                </div>
-
-                <div class="target-selector">
-                    <div class="selector-label">NUMPAD TARGET</div>
-                    <div class="selector-switches">
-                        <label class="toggle-switch">
-                            <input type="radio" name="target" value="dest-month" checked>
-                            <span class="switch-label">MONTH</span>
-                        </label>
-                        <label class="toggle-switch">
-                            <input type="radio" name="target" value="dest-day">
-                            <span class="switch-label">DAY</span>
-                        </label>
-                        <label class="toggle-switch">
-                            <input type="radio" name="target" value="dest-year">
-                            <span class="switch-label">YEAR</span>
-                        </label>
-                        <label class="toggle-switch">
-                            <input type="radio" name="target" value="dest-hour">
-                            <span class="switch-label">HOUR</span>
-                        </label>
-                        <label class="toggle-switch">
-                            <input type="radio" name="target" value="dest-min">
-                            <span class="switch-label">MIN</span>
-                        </label>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Useless Controls Section -->
-            <section class="useless-controls">
+        <!-- STEP 2: Controls -->
+        <main class="console-step" id="step-controls">
+            <div class="step-content">
                 <div class="control-row">
                     <div class="control-group">
-                        <div class="control-label">FLUX CAPACITOR</div>
+                        <div class="control-label">FLUX CAP.</div>
                         <label class="flip-switch">
                             <input type="checkbox" id="flux-switch">
                             <span class="flip-switch-slider"></span>
                         </label>
                     </div>
                     <div class="control-group">
-                        <div class="control-label">TEMPORAL SYNC</div>
+                        <div class="control-label">TEMP SYNC</div>
                         <label class="flip-switch">
                             <input type="checkbox" id="sync-switch">
                             <span class="flip-switch-slider"></span>
                         </label>
                     </div>
                     <div class="control-group">
-                        <div class="control-label">PARADOX SHIELD</div>
+                        <div class="control-label">PARADOX</div>
                         <label class="flip-switch">
                             <input type="checkbox" id="paradox-switch">
                             <span class="flip-switch-slider"></span>
                         </label>
                     </div>
                     <div class="control-group">
-                        <div class="control-label">QUANTUM LOCK</div>
+                        <div class="control-label">Q-LOCK</div>
                         <label class="flip-switch">
                             <input type="checkbox" id="quantum-switch">
                             <span class="flip-switch-slider"></span>
@@ -188,46 +146,14 @@
                     </div>
                 </div>
 
-                <div class="control-row">
-                    <div class="control-group">
-                        <div class="control-label">CHRONO BUFFER</div>
-                        <label class="flip-switch">
-                            <input type="checkbox" id="buffer-switch">
-                            <span class="flip-switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="control-group">
-                        <div class="control-label">WORMHOLE STAB.</div>
-                        <label class="flip-switch">
-                            <input type="checkbox" id="wormhole-switch">
-                            <span class="flip-switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="control-group">
-                        <div class="control-label">ENTROPY REV.</div>
-                        <label class="flip-switch">
-                            <input type="checkbox" id="entropy-switch">
-                            <span class="flip-switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="control-group">
-                        <div class="control-label">TIMELINE ANCHOR</div>
-                        <label class="flip-switch">
-                            <input type="checkbox" id="anchor-switch">
-                            <span class="flip-switch-slider"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Slider Controls -->
                 <div class="slider-row">
                     <div class="slider-control">
-                        <div class="slider-label">POWER OUTPUT</div>
+                        <div class="slider-label">POWER</div>
                         <input type="range" class="console-slider" id="power-slider" min="0" max="100" value="73">
                         <div class="slider-value" id="power-slider-value">73%</div>
                     </div>
                     <div class="slider-control">
-                        <div class="slider-label">FLUX RATE</div>
+                        <div class="slider-label">FLUX</div>
                         <input type="range" class="console-slider" id="flux-slider" min="0" max="100" value="88">
                         <div class="slider-value" id="flux-slider-value">88%</div>
                     </div>
@@ -238,14 +164,6 @@
                     </div>
                 </div>
 
-                <div class="button-row">
-                    <button class="useless-btn small" id="btn-aux1">AUX 1</button>
-                    <button class="useless-btn small" id="btn-aux2">AUX 2</button>
-                    <button class="useless-btn small" id="btn-aux3">AUX 3</button>
-                    <button class="useless-btn small" id="btn-reset">RESET</button>
-                </div>
-
-                <!-- Extra gauges and indicators -->
                 <div class="gauge-row">
                     <div class="gauge">
                         <div class="gauge-label">POWER LEVEL</div>
@@ -262,7 +180,7 @@
                         <div class="gauge-value">88 MPH</div>
                     </div>
                     <div class="gauge">
-                        <div class="gauge-label">CHRONO INTEGRITY</div>
+                        <div class="gauge-label">INTEGRITY</div>
                         <div class="gauge-bar">
                             <div class="gauge-fill" id="integrity-gauge" style="width: 95%"></div>
                         </div>
@@ -273,39 +191,79 @@
                 <div class="indicator-row">
                     <div class="indicator-light red" id="ind-warning">
                         <span class="light"></span>
-                        <span class="ind-label">WARNING</span>
+                        <span class="ind-label">WARN</span>
                     </div>
                     <div class="indicator-light yellow" id="ind-standby">
                         <span class="light"></span>
-                        <span class="ind-label">STANDBY</span>
+                        <span class="ind-label">STBY</span>
                     </div>
                     <div class="indicator-light green" id="ind-ready">
                         <span class="light"></span>
-                        <span class="ind-label">READY</span>
+                        <span class="ind-label">RDY</span>
                     </div>
                     <div class="indicator-light blue" id="ind-active">
                         <span class="light"></span>
-                        <span class="ind-label">ACTIVE</span>
+                        <span class="ind-label">ACT</span>
                     </div>
                     <div class="indicator-light orange" id="ind-charging">
                         <span class="light"></span>
-                        <span class="ind-label">CHARGING</span>
+                        <span class="ind-label">CHG</span>
                     </div>
                 </div>
-            </section>
 
-            <!-- Big Engage Button -->
-            <section class="engage-section">
-                <button class="engage-btn" id="engage-btn">
-                    <span class="engage-text">ENGAGE</span>
-                    <span class="engage-subtitle">TEMPORAL DISPLACEMENT</span>
-                </button>
-            </section>
+                <div class="step-nav">
+                    <button class="step-btn secondary" id="btn-back-date">BACK</button>
+                    <button class="step-btn arm" id="btn-arm">ARM SYSTEM</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- STEP 3: Engage -->
+        <main class="console-step" id="step-engage">
+            <div class="step-content engage-content">
+                <section class="display-section present">
+                    <div class="section-label">PRESENT TIME</div>
+                    <div class="display-row">
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="pres-month" data-digits="2" data-value="00"></div>
+                            <div class="display-label">MONTH</div>
+                        </div>
+                        <div class="display-separator">/</div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="pres-day" data-digits="2" data-value="00"></div>
+                            <div class="display-label">DAY</div>
+                        </div>
+                        <div class="display-separator">/</div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="pres-year" data-digits="4" data-value="0000"></div>
+                            <div class="display-label">YEAR</div>
+                        </div>
+                        <div class="display-spacer"></div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="pres-hour" data-digits="2" data-value="00"></div>
+                            <div class="display-label">HOUR</div>
+                        </div>
+                        <div class="display-separator">:</div>
+                        <div class="display-group">
+                            <div class="seven-seg-display" id="pres-min" data-digits="2" data-value="00"></div>
+                            <div class="display-label">MIN</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="engage-section">
+                    <button class="engage-btn" id="engage-btn">
+                        <span class="engage-text">ENGAGE</span>
+                        <span class="engage-subtitle">TEMPORAL DISPLACEMENT</span>
+                    </button>
+                </section>
+
+                <button class="step-btn secondary" id="btn-back-controls">DISARM</button>
+            </div>
         </main>
 
         <footer class="console-footer">
-            <div class="footer-text">CHRONOTECH INDUSTRIES © 2147</div>
-            <div class="footer-text">CAUTION: UNAUTHORIZED TIME TRAVEL IS A FEDERAL OFFENSE</div>
+            <div class="footer-text">CHRONOTECH INDUSTRIES &copy; 2147</div>
         </footer>
     </div>
 
