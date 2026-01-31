@@ -225,21 +225,60 @@ function initiateEngageSequence() {
             step++;
         } else {
             clearInterval(sequence);
-
-            // Flash everything
-            engageBtn.style.boxShadow = '0 0 100px #ff0000';
-            document.body.style.animation = 'flash 0.1s 5';
-
-            setTimeout(() => {
-                // Copy destination to last departed
-                copyDestToLast();
-                engageBtn.style.boxShadow = '';
-                document.body.style.animation = '';
-
-                alert('TEMPORAL DISPLACEMENT COMPLETE\n\nWelcome to your destination.');
-            }, 500);
+            startStrobeSequence(engageBtn);
         }
     }, 300);
+}
+
+function startStrobeSequence(engageBtn) {
+    const totalDuration = 8000;
+    const startTime = Date.now();
+    let strobeOn = false;
+
+    // Create overlay for strobe effect
+    const overlay = document.createElement('div');
+    overlay.id = 'strobe-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+    `;
+    document.body.appendChild(overlay);
+
+    engageBtn.style.boxShadow = '0 0 100px #ff0000';
+
+    function strobe() {
+        const elapsed = Date.now() - startTime;
+        const progress = elapsed / totalDuration;
+
+        if (elapsed >= totalDuration) {
+            // End sequence
+            overlay.remove();
+            engageBtn.style.boxShadow = '';
+            alert('TEMPORAL DISPLACEMENT COMPLETE\n\nWelcome to your destination.');
+            return;
+        }
+
+        // Increase intensity and speed as we progress
+        // Start at 500ms interval, end at 30ms
+        const interval = Math.max(30, 500 - (progress * 470));
+        // Start at 0.3 opacity, end at 1.0
+        const maxOpacity = 0.3 + (progress * 0.7);
+
+        strobeOn = !strobeOn;
+        overlay.style.opacity = strobeOn ? maxOpacity : 0;
+        overlay.style.background = strobeOn ? (Math.random() > 0.5 ? 'white' : '#ff0000') : 'white';
+
+        setTimeout(strobe, interval);
+    }
+
+    strobe();
 }
 
 function copyDestToLast() {
