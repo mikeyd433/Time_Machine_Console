@@ -423,18 +423,52 @@ function initSliders() {
     sliders.forEach(slider => {
         slider.addEventListener('input', updateGaugesFromSliders);
 
-        // Prevent page scroll while dragging slider on mobile
+        // Custom touch handling for vertical sliders
+        let isDragging = false;
+
         slider.addEventListener('touchstart', function(e) {
-            e.stopPropagation();
-        }, { passive: true });
+            isDragging = true;
+            e.preventDefault();
+            handleSliderTouch(slider, e);
+        }, { passive: false });
 
         slider.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            if (isDragging) {
+                e.preventDefault();
+                handleSliderTouch(slider, e);
+            }
         }, { passive: false });
+
+        slider.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+
+        slider.addEventListener('touchcancel', function() {
+            isDragging = false;
+        });
     });
 
     // Initial update
+    updateGaugesFromSliders();
+}
+
+function handleSliderTouch(slider, e) {
+    const touch = e.touches[0];
+    const rect = slider.getBoundingClientRect();
+
+    // Calculate position within slider (vertical, inverted for bottom-to-top)
+    const sliderHeight = rect.height;
+    const touchY = touch.clientY - rect.top;
+
+    // Invert: top = max, bottom = min
+    const percentage = 1 - (touchY / sliderHeight);
+    const clampedPercentage = Math.max(0, Math.min(1, percentage));
+
+    const min = parseInt(slider.min) || 0;
+    const max = parseInt(slider.max) || 100;
+    const newValue = Math.round(min + (clampedPercentage * (max - min)));
+
+    slider.value = newValue;
     updateGaugesFromSliders();
 }
 
