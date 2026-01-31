@@ -199,14 +199,13 @@ body {
 /* Control Panel */
 .control-panel {
     display: flex;
-    gap: 20px;
-    padding: 15px;
+    gap: 15px;
+    padding: 12px;
     background: rgba(0, 0, 0, 0.3);
     border: 2px solid #333;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex: 1;
 }
 
 .numpad-section { display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -373,20 +372,16 @@ body {
 .slider-row {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    flex: 1;
-    align-items: stretch;
-    padding: 10px 0;
+    gap: 25px;
+    padding: 8px 0;
 }
 .slider-control {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    flex: 1;
-    max-width: 100px;
+    gap: 6px;
+    width: 70px;
     touch-action: none;
-    position: relative;
 }
 .slider-label {
     font-size: 0.7rem;
@@ -407,19 +402,18 @@ body {
 .console-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 70px;
-    flex: 1;
-    min-height: 150px;
+    width: 60px;
+    height: 100px;
     background:
         linear-gradient(90deg, #444 0%, #333 4px, #0a0a0a 4px, #1a1a1a 50%, #0a0a0a calc(100% - 4px), #333 calc(100% - 4px), #444 100%);
-    border-radius: 8px;
+    border-radius: 6px;
     outline: none;
     writing-mode: vertical-lr;
     direction: rtl;
     touch-action: none;
     box-shadow:
-        0 4px 10px rgba(0,0,0,0.5),
-        inset 0 0 20px rgba(0,0,0,0.8);
+        0 4px 8px rgba(0,0,0,0.5),
+        inset 0 0 15px rgba(0,0,0,0.8);
 }
 
 /* Webkit track */
@@ -432,17 +426,16 @@ body {
 .console-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 60px;
-    height: 30px;
+    width: 52px;
+    height: 24px;
     background:
         linear-gradient(0deg, #333 0%, #555 10%, #777 25%, #999 45%, #aaa 50%, #999 55%, #777 75%, #555 90%, #333 100%);
     border: 2px solid #222;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: grab;
     box-shadow:
-        0 4px 10px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(255,255,255,0.5),
-        inset 0 -1px 0 rgba(0,0,0,0.3);
+        0 3px 8px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(255,255,255,0.5);
 }
 .console-slider:active::-webkit-slider-thumb {
     cursor: grabbing;
@@ -462,8 +455,8 @@ body {
 
 
 /* Gauges - Industrial Bar Style */
-.gauge-row { display: flex; justify-content: center; gap: 15px; padding: 15px 10px; flex-wrap: wrap; }
-.gauge { flex: 1; max-width: 200px; min-width: 100px; }
+.gauge-row { display: flex; justify-content: center; gap: 12px; padding: 8px 5px; flex-wrap: wrap; }
+.gauge { width: 110px; }
 .gauge-label {
     font-size: 0.65rem;
     color: #888;
@@ -474,7 +467,7 @@ body {
     font-weight: bold;
 }
 .gauge-bar {
-    height: 24px;
+    height: 16px;
     background:
         linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
     border: 2px solid #333;
@@ -618,23 +611,15 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex: 1;
     padding: 10px 5px;
-    gap: 15px;
+    gap: 10px;
     min-height: 0;
-}
-#step-date .step-content {
-    justify-content: space-between;
-}
-#step-controls .step-content {
-    justify-content: space-between;
-}
-#step-engage .step-content {
-    justify-content: space-between;
-    padding: 15px 5px;
+    overflow: hidden;
 }
 .engage-content {
-    justify-content: space-around;
+    justify-content: center;
 }
 .step-btn {
     display: block;
@@ -1085,13 +1070,13 @@ body {
     .useless-btn { padding: 6px 8px; font-size: 0.6rem; }
     .useless-btn.small { padding: 4px 6px; font-size: 0.5rem; }
 
-    .slider-row { gap: 20px; padding: 5px 0; }
-    .slider-control { max-width: 80px; }
-    .console-slider { width: 60px; min-height: 120px; }
-    .console-slider::-webkit-slider-thumb { width: 52px; height: 26px; }
-    .console-slider::-moz-range-thumb { width: 52px; height: 26px; }
-    .slider-label { font-size: 0.6rem; }
-    .slider-value { font-size: 0.7rem; }
+    .slider-row { gap: 15px; padding: 5px 0; }
+    .slider-control { width: 55px; }
+    .console-slider { width: 48px; height: 80px; }
+    .console-slider::-webkit-slider-thumb { width: 42px; height: 20px; }
+    .console-slider::-moz-range-thumb { width: 42px; height: 20px; }
+    .slider-label { font-size: 0.55rem; }
+    .slider-value { font-size: 0.6rem; }
 
     .gauge { width: 100px; }
     .gauge-bar { height: 14px; }
