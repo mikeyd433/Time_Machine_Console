@@ -117,20 +117,20 @@ body {
     justify-content: center;
 }
 
-.numpad-section { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.numpad-display { background: #000; padding: 5px; border: 2px solid #00ff00; }
-.numpad-display .digit { color: #00ff00; text-shadow: 0 0 8px #00ff00; }
+.numpad-section { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.numpad-display { background: #000; padding: 8px 12px; border: 2px solid #00ff00; }
+.numpad-display .digit { color: #00ff00; text-shadow: 0 0 8px #00ff00; font-size: 1.8rem; }
 
-.numpad { display: grid; grid-template-columns: repeat(3, 45px); gap: 4px; }
+.numpad { display: grid; grid-template-columns: repeat(3, 70px); gap: 6px; }
 .num-btn {
-    width: 45px; height: 38px;
+    width: 70px; height: 55px;
     font-family: 'Courier New', monospace;
-    font-size: 1rem; font-weight: bold;
+    font-size: 1.4rem; font-weight: bold;
     background: linear-gradient(145deg, #444, #222);
     border: 2px solid #555;
     color: #00ff00;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 .num-btn:active { transform: scale(0.95); }
 .clear-btn { color: #ff6600; border-color: #ff6600; }
@@ -461,8 +461,9 @@ body {
     .section-label { font-size: 0.55rem; margin-bottom: 3px; }
 
     .control-panel { padding: 8px; gap: 10px; }
-    .numpad { grid-template-columns: repeat(3, 40px); gap: 3px; }
-    .num-btn { width: 40px; height: 34px; font-size: 0.9rem; }
+    .numpad { grid-template-columns: repeat(3, 60px); gap: 5px; }
+    .num-btn { width: 60px; height: 48px; font-size: 1.2rem; }
+    .numpad-display .digit { font-size: 1.5rem; }
 
     .control-row { gap: 8px; margin-bottom: 8px; }
     .flip-switch { width: 30px; height: 42px; }
