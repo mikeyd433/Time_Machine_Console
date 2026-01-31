@@ -232,6 +232,8 @@ function initStepNavigation() {
     }
     if (btnArm) {
         btnArm.addEventListener('click', () => {
+            // Sync destination readout before showing engage step
+            syncDestinationReadout();
             // Arm the system - show engage step
             showStep('step-engage');
             // Activate indicators
@@ -261,6 +263,36 @@ function showStep(stepId) {
     if (targetStep) {
         targetStep.classList.add('active');
     }
+}
+
+// Sync destination readout on engage screen with main destination display
+function syncDestinationReadout() {
+    const fields = ['month', 'day', 'year', 'hour', 'min'];
+    fields.forEach(field => {
+        const source = document.getElementById(`dest-${field}`);
+        const target = document.getElementById(`dest-readout-${field}`);
+        if (source && target) {
+            // Copy the segment states from source to target
+            const sourceDigits = source.querySelectorAll('.seg-digit');
+            const targetDigits = target.querySelectorAll('.seg-digit');
+            sourceDigits.forEach((srcDigit, i) => {
+                if (targetDigits[i]) {
+                    // Copy each segment's on/off state
+                    ['a', 'b', 'c', 'd', 'e', 'f', 'g'].forEach(seg => {
+                        const srcSeg = srcDigit.querySelector(`.seg-${seg}`);
+                        const tgtSeg = targetDigits[i].querySelector(`.seg-${seg}`);
+                        if (srcSeg && tgtSeg) {
+                            if (srcSeg.classList.contains('on')) {
+                                tgtSeg.classList.add('on');
+                            } else {
+                                tgtSeg.classList.remove('on');
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
 }
 
 function initNumpad() {
