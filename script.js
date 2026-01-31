@@ -258,10 +258,14 @@ function startStrobeSequence(engageBtn) {
         const progress = elapsed / totalDuration;
 
         if (elapsed >= totalDuration) {
-            // End sequence
-            overlay.remove();
-            engageBtn.style.boxShadow = '';
-            alert('TEMPORAL DISPLACEMENT COMPLETE\n\nWelcome to your destination.');
+            // Hold on white screen for 3 seconds
+            overlay.style.opacity = 1;
+            overlay.style.background = 'white';
+
+            setTimeout(() => {
+                overlay.remove();
+                engageBtn.style.boxShadow = '';
+            }, 3000);
             return;
         }
 
