@@ -14,6 +14,9 @@ const maxLengths = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize menu
+    initMenu();
+
     // Initialize numpad
     initNumpad();
 
@@ -30,6 +33,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check auth status
     checkAuthStatus();
 });
+
+function initMenu() {
+    const menuBtn = document.getElementById('menu-btn');
+    const menuDropdown = document.getElementById('menu-dropdown');
+    const forceUpdate = document.getElementById('force-update');
+    const resetAuth = document.getElementById('reset-auth');
+
+    if (menuBtn && menuDropdown) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => {
+            menuDropdown.classList.remove('show');
+        });
+    }
+
+    if (forceUpdate) {
+        forceUpdate.addEventListener('click', async () => {
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (const reg of registrations) {
+                    await reg.unregister();
+                }
+            }
+            if ('caches' in window) {
+                const keys = await caches.keys();
+                for (const key of keys) {
+                    await caches.delete(key);
+                }
+            }
+            location.reload(true);
+        });
+    }
+
+    if (resetAuth) {
+        resetAuth.addEventListener('click', () => {
+            localStorage.removeItem('fingerprint-auth');
+            localStorage.removeItem('voice-auth');
+            localStorage.removeItem('retina-auth');
+            location.reload();
+        });
+    }
+}
 
 function initNumpad() {
     const numButtons = document.querySelectorAll('.num-btn');

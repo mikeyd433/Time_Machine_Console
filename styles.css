@@ -25,6 +25,7 @@ body {
     padding: 8px;
     border-bottom: 2px solid #00ff00;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .logo {
@@ -37,6 +38,28 @@ body {
 
 .subtitle { font-size: 0.7rem; color: #888; }
 .model { font-size: 0.7rem; color: #ff6600; margin-top: 3px; }
+
+/* Menu */
+.menu-container { position: absolute; top: 8px; right: 8px; }
+.menu-btn {
+    background: none; border: none; color: #888;
+    font-size: 1.5rem; cursor: pointer; padding: 5px 10px;
+    line-height: 1;
+}
+.menu-btn:hover { color: #00ff00; }
+.menu-dropdown {
+    display: none; position: absolute; right: 0; top: 100%;
+    background: #222; border: 1px solid #444;
+    min-width: 120px; z-index: 100;
+}
+.menu-dropdown.show { display: block; }
+.menu-item {
+    display: block; width: 100%; padding: 10px 15px;
+    background: none; border: none; color: #888;
+    font-family: 'Courier New', monospace; font-size: 0.75rem;
+    text-align: left; cursor: pointer;
+}
+.menu-item:hover { background: #333; color: #00ff00; }
 
 /* Auth Status Bar */
 .auth-status-bar {
