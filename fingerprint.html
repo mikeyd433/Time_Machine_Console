@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T.I.M.E. - Fingerprint Authentication</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="console-frame auth-page">
+        <header class="console-header">
+            <div class="logo">T.I.M.E.</div>
+            <div class="subtitle">Biometric Security Module</div>
+            <div class="model">FINGERPRINT AUTHENTICATION</div>
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-container">
+                <div class="auth-status" id="auth-status">
+                    <span class="status-text">AWAITING FINGERPRINT</span>
+                </div>
+
+                <div class="fingerprint-scanner" id="fingerprint-scanner">
+                    <div class="scanner-frame">
+                        <div class="scanner-glass">
+                            <div class="scan-line" id="scan-line"></div>
+                            <svg class="fingerprint-svg" viewBox="0 0 100 100">
+                                <path class="fp-line" d="M50 10 Q30 25 30 50 Q30 75 50 90"/>
+                                <path class="fp-line" d="M50 15 Q35 28 35 50 Q35 72 50 85"/>
+                                <path class="fp-line" d="M50 20 Q40 32 40 50 Q40 68 50 80"/>
+                                <path class="fp-line" d="M50 25 Q45 35 45 50 Q45 65 50 75"/>
+                                <path class="fp-line" d="M50 10 Q70 25 70 50 Q70 75 50 90"/>
+                                <path class="fp-line" d="M50 15 Q65 28 65 50 Q65 72 50 85"/>
+                                <path class="fp-line" d="M50 20 Q60 32 60 50 Q60 68 50 80"/>
+                                <path class="fp-line" d="M50 25 Q55 35 55 50 Q55 65 50 75"/>
+                                <path class="fp-line" d="M35 40 Q50 35 65 40"/>
+                                <path class="fp-line" d="M32 50 Q50 45 68 50"/>
+                                <path class="fp-line" d="M35 60 Q50 55 65 60"/>
+                            </svg>
+                        </div>
+                        <div class="scanner-label">PLACE FINGER HERE</div>
+                    </div>
+                </div>
+
+                <div class="auth-info">
+                    <div class="info-row">
+                        <span class="info-label">SCAN ATTEMPTS:</span>
+                        <span class="info-value" id="scan-attempts">0 / 3</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">SECURITY LEVEL:</span>
+                        <span class="info-value">MAXIMUM</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">ENCRYPTION:</span>
+                        <span class="info-value">QUANTUM-256</span>
+                    </div>
+                </div>
+
+                <div class="auth-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0%</div>
+                </div>
+
+                <div class="auth-message" id="auth-message">
+                    Touch the scanner to begin authentication
+                </div>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="index.html" class="auth-btn back-btn">← BACK TO CONSOLE</a>
+                <button class="auth-btn reset-btn" id="reset-btn">RESET SCANNER</button>
+            </div>
+        </main>
+
+        <footer class="console-footer">
+            <div class="footer-text">BIOMETRIC DATA IS STORED SECURELY IN THE PAST</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        initFingerprint();
+    </script>
+</body>
+</html>

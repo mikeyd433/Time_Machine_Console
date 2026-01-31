@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T.I.M.E. - Retina Scan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="console-frame auth-page">
+        <header class="console-header">
+            <div class="logo">T.I.M.E.</div>
+            <div class="subtitle">Biometric Security Module</div>
+            <div class="model">RETINAL PATTERN SCANNER</div>
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-container">
+                <div class="auth-status" id="auth-status">
+                    <span class="status-text">ALIGN EYE WITH SCANNER</span>
+                </div>
+
+                <div class="retina-scanner" id="retina-scanner">
+                    <div class="eye-container">
+                        <div class="eye-frame">
+                            <div class="eye">
+                                <div class="iris">
+                                    <div class="pupil"></div>
+                                    <div class="iris-pattern"></div>
+                                </div>
+                                <div class="scan-ring" id="scan-ring"></div>
+                                <div class="scan-crosshair">
+                                    <div class="crosshair-h"></div>
+                                    <div class="crosshair-v"></div>
+                                </div>
+                            </div>
+                            <div class="corner-marks">
+                                <span class="corner tl"></span>
+                                <span class="corner tr"></span>
+                                <span class="corner bl"></span>
+                                <span class="corner br"></span>
+                            </div>
+                        </div>
+                        <div class="scanner-label">LOOK DIRECTLY AT THE LIGHT</div>
+                    </div>
+                    <button class="scan-btn" id="scan-btn">
+                        <span class="scan-text">INITIATE SCAN</span>
+                    </button>
+                </div>
+
+                <div class="retina-data">
+                    <div class="data-visual">
+                        <canvas id="retina-canvas" width="200" height="200"></canvas>
+                    </div>
+                    <div class="data-readout">
+                        <div class="readout-row">
+                            <span class="readout-label">IRIS DIAMETER:</span>
+                            <span class="readout-value" id="iris-diam">-- mm</span>
+                        </div>
+                        <div class="readout-row">
+                            <span class="readout-label">PUPIL RESPONSE:</span>
+                            <span class="readout-value" id="pupil-resp">--</span>
+                        </div>
+                        <div class="readout-row">
+                            <span class="readout-label">PATTERN NODES:</span>
+                            <span class="readout-value" id="pattern-nodes">--</span>
+                        </div>
+                        <div class="readout-row">
+                            <span class="readout-label">BLOOD VESSEL MAP:</span>
+                            <span class="readout-value" id="vessel-map">PENDING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="auth-info">
+                    <div class="info-row">
+                        <span class="info-label">RETINAL MATCH:</span>
+                        <span class="info-value" id="retina-match">-- %</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">SCAN QUALITY:</span>
+                        <span class="info-value" id="scan-quality">AWAITING</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">LIVENESS CHECK:</span>
+                        <span class="info-value" id="liveness">PENDING</span>
+                    </div>
+                </div>
+
+                <div class="auth-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">0%</div>
+                </div>
+
+                <div class="auth-message" id="auth-message">
+                    Position your eye within the scanner frame
+                </div>
+
+                <div class="warning-box">
+                    <span class="warning-icon">⚠</span>
+                    <span class="warning-text">WARNING: Do not blink during scan sequence</span>
+                </div>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="index.html" class="auth-btn back-btn">← BACK TO CONSOLE</a>
+                <button class="auth-btn reset-btn" id="reset-btn">RESET SCANNER</button>
+            </div>
+        </main>
+
+        <footer class="console-footer">
+            <div class="footer-text">RETINAL PATTERNS UNIQUE ACROSS ALL PARALLEL UNIVERSES</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        initRetina();
+    </script>
+</body>
+</html>
